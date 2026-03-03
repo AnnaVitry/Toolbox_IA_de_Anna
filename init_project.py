@@ -101,6 +101,10 @@ dependencies = [
     "myst-parser",
 ]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
 [tool.ruff]
 line-length = 88
 target-version = "py311"
@@ -115,6 +119,7 @@ ignore = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+python_files = "test_*.py"
 pythonpath = ["."]
 addopts = "-v --cov=app --cov-report=term-missing"
 """
@@ -128,6 +133,9 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 WORKDIR /app
 COPY . .
 RUN uv sync --frozen
+
+# Ajout du chemin pour que le package 'app' soit reconnu
+ENV PYTHONPATH="."
 
 CMD ["uv", "run", "app/main.py"]
 """
@@ -162,7 +170,7 @@ jobs:
     create_file("LICENSE", "MIT License")
     create_file(
         "README.md",
-        "# SQLalchemy Exo Toolbox\n\nBienvenue dans le template professionnel.",
+        "# Toolbox\n\nBienvenue dans le template professionnel.",
     )
 
     print(f"\n{CYAN}ʕ•ᴥ•ʔ Arborescence et configurations créées avec succès.{NC}")
