@@ -1,14 +1,20 @@
-Référence de l'API
-==================
+Référence du Code Source
+========================
 
-C'est ici que Sphinx extrait les docstrings Google de votre code source.
+Cette section détaille les modules, fonctions et classes de la Toolbox.
+
+Logiciel de Calcul (mon_module)
+-------------------------------
 
 .. automodule:: app.modules.mon_module
    :members:
    :undoc-members:
    :show-inheritance:
+   :no-index:
+
+Point d'entrée (main)
+---------------------
 
 .. automodule:: app.main
    :members:
-   :undoc-members:
    :show-inheritance:
