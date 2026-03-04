@@ -36,10 +36,3 @@ Bienvenu dans la Doc ʕ•́ᴥ•̀ʔっ ♡
    contributing
    license
    code_of_conduct
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

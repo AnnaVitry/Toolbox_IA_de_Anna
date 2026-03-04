@@ -231,15 +231,13 @@ Les mainteneurs du projet (Anna) sont responsables de l'application de ces stand
         "docs/source/contributing.md",
         """# Guide de contribution
 
-```{include} ../../.github/CONTRIBUTING.md
-:start-line: 1```{include} ../../../.github/CONTRIBUTING.md\n```""",
+```{include} ../../.github/CONTRIBUTING.md\n:start-line: 1\n```""",
     )
     create_file(
         "docs/source/code_of_conduct.md",
         """# Code de Conduite
 
-```{include} ../../.github/CODE_OF_CONDUCT.md
-:start-line: 1`""",
+```{include} ../../.github/CODE_OF_CONDUCT.md\n:start-line: 1\n```""",
     )
 
     create_file("LICENSE", "MIT License")
@@ -299,13 +297,6 @@ Bienvenu dans la Doc ʕ•́ᴥ•̀ʔっ ♡
    contributing
    license
    code_of_conduct
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 """
     create_file("docs/source/index.rst", index_rst_content)
 

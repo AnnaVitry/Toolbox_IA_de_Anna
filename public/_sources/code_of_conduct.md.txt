@@ -1,4 +1,5 @@
 # Code de Conduite
 
 ```{include} ../../.github/CODE_OF_CONDUCT.md
-:start-line: 1`
+:start-line: 1
+```
