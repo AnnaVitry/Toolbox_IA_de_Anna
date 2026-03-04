@@ -86,7 +86,7 @@ def setup_toolbox():
     # 2. Création du pyproject.toml centralisé
     pyproject_content = """
 [project]
-name = "sqlalchemy-exo"
+name = "Toolbox-IA"
 version = "0.1.0"
 description = "Toolbox de référence pour le cursus IA"
 readme = "README.md"
