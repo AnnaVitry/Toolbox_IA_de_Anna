@@ -1,25 +1,19 @@
 # IA Foundation Toolbox de Anna
 
+[![CI Status](https://github.com/USER/REPO/actions/workflows/ci.yml/badge.svg)](https://github.com/USER/REPO/actions)
+![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
+
 Ce projet est un template professionnel standardisé pour le cursus IA. Il intègre la gestion des dépendances avec `uv`, la qualité de code avec `ruff`, les tests avec `pytest` et la documentation automatique avec `Sphinx`.
+## ʕ•ᴥ•ʔっ · · · ✴ Installation Rapide
 
-## ʕ•ᴥ•ʔっ · · · ✴ Guide d'Initialisation Rapide
-
-Suivez ces étapes dans l'ordre pour configurer votre environnement de développement.
-
-### 1. Préparation de la Structure
-Générez l'arborescence et les fichiers de configuration de base :
-```bash
-python init_project.py
-
-```
-
-### 2. Installation de l'Environnement
-
-Installez les dépendances (Sphinx, Furo, Pytest, Ruff, Pandas) dans un environnement virtuel isolé :
+Assurez-vous d'avoir [uv](https://github.com/astral-sh/uv) installé.
 
 ```bash
+git clone [https://github.com/USER/REPO.git](https://github.com/USER/REPO.git)
+cd REPO
 uv sync
-
 ```
 
 ### 3. Initialisation de Sphinx
