@@ -149,25 +149,110 @@ CMD ["uv", "run", "app/main.py"]
     create_file("Dockerfile", docker_content)
 
     # 4. Création du Workflow CI GitHub Actions
+    # name: CI Quality Check
+    # on:
+    #   push:
+    #     branches: [main, dev]
+    #   pull_request:
+    #     branches: [main]
+
+    # jobs:
+    #   test:
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #       - uses: actions/checkout@v4
+    #       - name: Install uv
+    #         uses: astral-sh/setup-uv@v3
+    #       - name: Lint with ruff
+    #         run: uv run ruff check .
+    #       - name: Run tests
+    #         run: uv run pytest
     ci_content = """
 name: CI Quality Check
+
 on:
   push:
     branches: [main, dev]
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
-  test:
+  quality-gate:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12"] # On utilise la 3.12 comme référence pour le badge
+
     steps:
       - uses: actions/checkout@v4
+
       - name: Install uv
-        uses: astral-sh/setup-uv@v3
+        uses: astral-sh/setup-uv@v5 # Setup-uv v5 est plus stable
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync
+
       - name: Lint with ruff
         run: uv run ruff check .
-      - name: Run tests
-        run: uv run pytest
+
+      - name: Run tests and generate coverage badge
+        run: |
+          # On génère le rapport XML requis par genbadge
+          uv run pytest --cov=app --cov-report=xml
+          # Création du badge SVG dans le dossier source de la doc
+          uv run genbadge coverage -i coverage.xml -o docs/source/_static/coverage.svg
+
+      - name: Save the coverage badge as Artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-badge-${{ matrix.python-version }}
+          path: docs/source/_static/coverage.svg
+          if-no-files-found: error
+
+  deploy-docs:
+    needs: quality-gate
+    if: github.ref == 'refs/heads/main' # On ne déploie la doc que depuis main
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Download coverage badge
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-badge-3.12
+          path: docs/source/_static/
+
+      - name: Build Documentation (Sphinx)
+        run: uv run sphinx-build docs/source public
+
+      - name: Upload artifact Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 """
     create_file(".github/workflows/ci.yml", ci_content)
 
