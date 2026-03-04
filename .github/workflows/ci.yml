@@ -69,7 +69,7 @@ jobs:
       - name: Download coverage badge
         uses: actions/download-artifact@v4
         with:
-          name: coverage-badge-${{ matrix.python-version }}
+          name: coverage-badge-3.12
           path: docs/build/html/
 
       - name: Build Documentation (Sphinx)
