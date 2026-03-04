@@ -20,7 +20,7 @@ uv run ruff check .
 echo -e "${GREEN}✔ Qualité validée.${NC}"
 
 echo -e "\n${CYAN}[2/4]${NC} ${YELLOW}Exécution des tests unitaires (Pytest)...${NC}"
-uv run pytest
+uv run pytest -v --cov=app --cov-report=term-missing
 echo -e "${GREEN}✔ Tests réussis.${NC}"
 
 echo -e "\n${CYAN}[3/4]${NC} ${YELLOW}Génération de la documentation (Sphinx)...${NC}"
