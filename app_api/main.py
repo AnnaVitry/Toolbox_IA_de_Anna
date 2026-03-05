@@ -1,32 +1,28 @@
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from maths.mon_module import add
+from models.models import Base, Calcul
+from modules.connect import engine, get_db
+from sqlalchemy.orm import Session
 
-app = FastAPI(title="Toolbox IA API")
+# Création des tables (pour le test local en SQLite)
+Base.metadata.create_all(bind=engine)
 
-# Simulation d'une base de données en mémoire
-fake_db = []
-
-
-@app.get("/")
-def read_root():
-    return {"message": "Bienvenue sur l'API de la Toolbox IA ʕ•ᴥ•ʔ"}
+app = FastAPI()
 
 
 @app.get("/compute/add")
-def compute_add(a: int, b: int):
-    """Expose la fonction add du Projet 1 via une URL."""
-    result = add(a, b)
-    return {"operation": "addition", "a": a, "b": b, "result": result}
+def compute_add(a: float, b: float, db: Session = Depends(get_db)):
+    res = add(a, b)
 
+    # On enregistre en base de données
+    nouveau_calcul = Calcul(a=a, b=b, resultat=res)
+    db.add(nouveau_calcul)
+    db.commit()
 
-@app.post("/data")
-def create_data(item: dict):
-    """Route POST pour sauvegarder des données"""
-    fake_db.append(item)
-    return {"status": "success", "added": item}
+    return {"result": res, "saved": True}
 
 
 @app.get("/data")
-def get_all_data():
-    """Route GET pour récupérer les données"""
-    return {"database_content": fake_db}
+def get_history(db: Session = Depends(get_db)):
+    """Récupère l'historique des calculs."""
+    return db.query(Calcul).all()

@@ -6,8 +6,7 @@ de données Pandas en utilisant les fonctions de mon_module.py.
 
 import pandas as pd
 import pytest
-
-from app.modules.mon_module import add, print_data, square
+from app_api.modules.mon_module import add, print_data, square
 
 # --- TESTS MATHÉMATIQUES ---
 
