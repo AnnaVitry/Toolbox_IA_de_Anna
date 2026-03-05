@@ -42,3 +42,9 @@ testpaths = ["tests"]
 python_files = "test_*.py"
 pythonpath = ["."]
 addopts = "-v --cov=app --cov-report=term-missing"
+
+[tool.uv.workspace]
+members = [
+    "app_api",
+    "app_front",
+]
