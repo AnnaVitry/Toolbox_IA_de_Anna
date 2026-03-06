@@ -264,22 +264,6 @@
 </pre></div>
 </div>
 </section>
-<section id="traitement-de-donnees-avec-pandas">
-<h2>Traitement de Données avec Pandas<a class="headerlink" href="#traitement-de-donnees-avec-pandas" title="Lien vers cette rubrique">¶</a></h2>
-<p>La Toolbox est conçue pour faciliter l’analyse de données. La fonction <code class="docutils literal notranslate"><span class="pre">print_data</span></code> permet de visualiser un DataFrame et d’en extraire le volume.</p>
-<p><strong>Exemple d’analyse de fichier CSV :</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">app.modules.mon_module</span><span class="w"> </span><span class="kn">import</span> <span class="n">print_data</span>
-
-<span class="c1"># Chargement d&#39;un jeu de données</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;moncsv.csv&quot;</span><span class="p">)</span>
-
-<span class="c1"># Affichage et récupération du nombre de lignes</span>
-<span class="n">nb_lignes</span> <span class="o">=</span> <span class="n">print_data</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le fichier contient </span><span class="si">{</span><span class="n">nb_lignes</span><span class="si">}</span><span class="s2"> enregistrements.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
 <section id="bonnes-pratiques">
 <h2>Bonnes Pratiques<a class="headerlink" href="#bonnes-pratiques" title="Lien vers cette rubrique">¶</a></h2>
 <ol class="arabic simple">

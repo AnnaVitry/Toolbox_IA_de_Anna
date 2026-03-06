@@ -22,25 +22,6 @@ Le module ``mon_module`` propose des fonctions arithmétiques simples mais robus
    puissance = square(resultat)
    print(f"Le carré de {resultat} est {puissance}")
 
-Traitement de Données avec Pandas
----------------------------------
-
-La Toolbox est conçue pour faciliter l'analyse de données. La fonction ``print_data`` permet de visualiser un DataFrame et d'en extraire le volume.
-
-**Exemple d'analyse de fichier CSV :**
-
-.. code-block:: python
-
-   import pandas as pd
-   from app.modules.mon_module import print_data
-
-   # Chargement d'un jeu de données
-   df = pd.read_csv("moncsv.csv")
-
-   # Affichage et récupération du nombre de lignes
-   nb_lignes = print_data(df)
-   print(f"Le fichier contient {nb_lignes} enregistrements.")
-
 Bonnes Pratiques
 ----------------
 
