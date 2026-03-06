@@ -3,6 +3,7 @@
 
 Ce script génère automatiquement l'arborescence complète et les fichiers de
 configuration pour un projet Python moderne, scalable et conteneurisé.
+A EXECUTER A LA RACINE DU PROJET.
 
 Architecture générée (3 tiers) :
     - Backend (app_api) : API REST avec FastAPI et SQLAlchemy.
