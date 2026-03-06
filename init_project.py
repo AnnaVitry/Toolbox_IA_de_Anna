@@ -390,41 +390,61 @@ jobs:
 """
     create_file(".github/workflows/ci.yml", ci)
 
-    cd = """name: Continuous Deployment (Docker)
+    # [Note pour Anna] : On utilise GHCR.io pour éviter de gérer des secrets DockerHub.
+    # Le pipeline CD ne se déclenche que si le pipeline CI (nommé ici "CI Pipeline - Toolbox V2") réussit.
+    cd_content = """
+name: CD Pipeline - Livraison GHCR
+
 on:
-  push:
-    tags:
-      - 'v*'
+  workflow_run:
+    workflows: ["CI Pipeline - Toolbox V2"]
+    types:
+      - completed
+    branches:
+      - main
 
 jobs:
   build-and-push:
+    # On vérifie de manière stricte que le pipeline précédent est "success"
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: docker/setup-buildx-action@v3
-      - uses: docker/login-action@v3
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Connexion au GitHub Container Registry
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build API
+      - name: Build et Push - API
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./app_api/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/toolbox-api:latest
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/toolbox-api:latest
+            ghcr.io/${{ github.repository_owner }}/toolbox-api:${{ github.sha }}
 
-      - name: Build Front
+      - name: Build et Push - Front
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./app_front/Dockerfile
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/toolbox-front:latest
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/toolbox-front:latest
+            ghcr.io/${{ github.repository_owner }}/toolbox-front:${{ github.sha }}
 """
-    create_file(".github/workflows/cd.yml", cd)
+    create_file(".github/workflows/cd.yml", cd_content)
 
     # ==========================================
     # 7. SPHINX (Documentation)
