@@ -1,5 +1,5 @@
 import os
 import sys
 
-# Ajoute la racine du projet au PYTHONPATH
+# On force l'ajout de la racine du projet dans le chemin de recherche
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))

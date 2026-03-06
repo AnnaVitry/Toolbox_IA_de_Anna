@@ -1,8 +1,10 @@
 from fastapi import Depends, FastAPI
-from maths.mon_module import add
-from models.models import Base, Calcul
-from modules.connect import engine, get_db
 from sqlalchemy.orm import Session
+
+# Toujours repartir de la racine du package app_api
+from app_api.maths.mon_module import add
+from app_api.models.database import Base, Calcul
+from app_api.modules.connect import engine, get_db
 
 # Création des tables (pour le test local en SQLite)
 Base.metadata.create_all(bind=engine)

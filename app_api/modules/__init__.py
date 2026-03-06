@@ -1,1 +1,1 @@
-"""Package contenant les modules de logique métier."""
+"""Package contenant les modules utilitaires de l'API (Connexion DB, Auth, etc.)."""
