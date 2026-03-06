@@ -1,19 +1,13 @@
 # Toolbox IA - Architecture Microservices de Anna
 
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
-
 ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
-
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-
 ![Python Version](https://img.shields.io/badge/python-3.12-blue.svg?style=for-the-badge)
 
 ![CI Status](https://github.com/AnnaVitry/Toolbox_IA_Anna/actions/workflows/ci.yml/badge.svg)
-
 [![Coverage](https://annavitry.github.io/Toolbox_IA_Anna/_static/coverage.svg)](https://annavitry.github.io/Toolbox_IA_Anna/)![Python Version](https://img.shields.io/badge/python-3.12-blue.svg)
-
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 Ce projet est une plateforme de services IA **multi-tiers** conteneurisée. Elle orchestre une interface utilisateur, une API de calcul et une base de données persistante PostgreSQL.
