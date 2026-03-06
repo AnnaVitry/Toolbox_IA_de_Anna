@@ -94,7 +94,7 @@ def setup_microservices():
 
         # Gestion spécifique pour le modèle (Correction Ruff F401)
         if folder == "app_api/models":
-            doc = '"""Package SQLAlchemy avec ré-export."""\n\nfrom .database import Base as Base\n'
+            doc = '"""Package SQLAlchemy avec ré-export."""\n\nfrom .database import Base as Base\nfrom .database import Calcul as Calcul\n'
         else:
             doc = f'"""Package {folder.replace("/", ".")}."""\n'
 
@@ -182,7 +182,9 @@ omit = ["tests/*", "**/__init__.py"]
       retries: 5
 
   api:
-    build: ./app_api
+    build:
+      context: .
+      dockerfile: app_api/Dockerfile
     container_name: api-1
     depends_on:
       db:
@@ -193,7 +195,9 @@ omit = ["tests/*", "**/__init__.py"]
       - front-net
 
   front:
-    build: ./app_front
+    build: .
+      context: .
+      dockerfile: app_front/Dockerfile
     container_name: front-1
     ports:
       - "8501:8501"
