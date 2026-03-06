@@ -1,0 +1,26 @@
+# Dépendances locales (très lourd, ne pas envoyer au build)
+.venv/
+venv/
+node_modules/
+
+# Caches Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Outils de qualité et tests
+.pytest_cache/
+.ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# IDE et Système
+.vscode/
+.idea/
+.DS_Store
+
+# Git
+.git/
+.github/
